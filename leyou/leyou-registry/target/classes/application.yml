@@ -1,0 +1,26 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: leyou-registry
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+    registerWithEureka: false # 把自己注册到eureka服务列表
+    fetchRegistry: false # 拉取eureka服务信息
+  server:
+    enable-self-preservation: false # 关闭自我保护
+    eviction-interval-timer-in-ms: 5000 # 每隔5秒钟，进行一次服务列表的清理
+
+ribbon:
+  ReadTimeout: 6000000
+  ConnectTimeout: 6000000
+  #forword error2
+  hystrix:
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeout-in-milliseconds: 6000000
